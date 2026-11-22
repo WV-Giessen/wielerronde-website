@@ -4,6 +4,12 @@
       "naam": "Den Doorn"
     }
   ],
+  "zilver": [
+    {
+      "naam": "E van Wijk",
+      "logo": "/content/images/e van wijk-2.png"
+    }
+  ],
   "brons": [
     {
       "naam": "Brons 1"
