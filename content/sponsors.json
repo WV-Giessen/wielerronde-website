@@ -2,6 +2,14 @@
   "goud": [
     {
       "naam": "Den Doorn"
+    },
+    {
+      "naam": "test 1",
+      "logo": "/content/images/denDoorn-2.png"
+    },
+    {
+      "naam": "test2",
+      "logo": "/content/images/e van wijk-3.png"
     }
   ],
   "zilver": [
