@@ -164,6 +164,9 @@ section{padding:62px 0}
 .bericht h3{font-size:20px;margin:6px 0 0}
 @media(min-width:760px){.nieuws{grid-template-columns:repeat(3,1fr)}}
 
+.ig-raster{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(296px,1fr));align-items:start}
+.ig-raster blockquote.instagram-media{margin:0 !important;min-width:0 !important;width:100% !important;max-width:100% !important}
+.ig-knop{margin-top:22px}
 .overig{background:var(--vlak);border-top:1px solid var(--lijn)}
 .laag{margin-bottom:34px}
 .laag h3{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--grijs);font-family:Archivo,sans-serif;margin-bottom:16px}
@@ -218,6 +221,7 @@ footer a{color:#fff}
     <a class="sprong" href="#parcours">Parcours</a>
     <a class="sprong" href="#uitslagen">Uitslagen</a>
     <a class="sprong" href="#nieuws">Nieuws</a>
+    <a class="sprong" href="#instagram">Instagram</a>
     <a class="sprong" href="#sponsors">Sponsors</a>
     <a class="sprong" href="#contact">Contact</a>
   </div>
@@ -319,6 +323,15 @@ footer a{color:#fff}
   </div>
 </section>
 
+<section id="instagram">
+  <div class="wrap op">
+    <div class="kop"><h2>Op Instagram</h2></div>
+    <p id="igIntro" style="color:var(--grijs);max-width:54ch"></p>
+    <div class="ig-raster" id="igLijst"></div>
+    <a class="knop ig-knop" id="igKnop" href="#" target="_blank" rel="noopener">Volg ons op Instagram</a>
+  </div>
+</section>
+
 <section id="sponsors" class="overig">
   <div class="wrap op">
     <div class="kop"><h2>Sponsors</h2><p>zonder hen geen ronde</p></div>
@@ -398,6 +411,7 @@ const standaard = {
     { tijd:"20.45", titel:"Elite en beloften", meta:"hoofdwedstrijd", soort:"top" }
   ],
   nieuws:[],
+  instagram:{ intro:"", berichten:[] },
   sponsors:{ goud:[], zilver:[], brons:[] },
   uitslagen:[],
   reserve:{
@@ -416,6 +430,20 @@ function plaatshouder(naam, h){
     + `<text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" `
     + `font-family="Archivo,Arial" font-size="${Math.round(h*0.26)}" fill="#8A98A6">${naam}</text></svg>`;
   return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+}
+
+/* Maakt van een geplakte Instagram-link de vorm die het insluiten nodig heeft.
+   Alles achter het vraagteken gaat eraf; andere links worden overgeslagen. */
+function schoonIgLink(ruw){
+  if (!ruw) return null;
+  try {
+    const u = new URL(String(ruw).trim());
+    if (!/(^|\.)instagram\.com$/.test(u.hostname)) return null;
+    const m = u.pathname.match(/^\/(p|reel|tv)\/([A-Za-z0-9_-]+)/);
+    return m ? `https://www.instagram.com/${m[1]}/${m[2]}/` : null;
+  } catch (e) {
+    return null;
+  }
 }
 
 async function laad(pad){
@@ -504,6 +532,25 @@ function toon(inhoud){
         </a>`).join("")
     : `<div class="leeg">Nog geen berichten.</div>`;
 
+  /* Instagram: alleen de berichten die in het CMS zijn ingevoerd.
+     Het script van Instagram wordt pas geladen als er echt iets te tonen is. */
+  $("igKnop").href = l.instagram;
+  $("igIntro").textContent = (inhoud.instagram && inhoud.instagram.intro) || "";
+  const igLinks = ((inhoud.instagram && inhoud.instagram.berichten) || [])
+    .map(b => schoonIgLink(b.link))
+    .filter(Boolean);
+  if (igLinks.length){
+    $("igLijst").innerHTML = igLinks.map(u =>
+      `<blockquote class="instagram-media" data-instgrm-permalink="${u}" data-instgrm-version="14"></blockquote>`).join("");
+    const sc = document.createElement("script");
+    sc.async = true;
+    sc.src = "https://www.instagram.com/embed.js";
+    sc.onload = () => { if (window.instgrm) window.instgrm.Embeds.process(); };
+    document.body.appendChild(sc);
+  } else {
+    $("igLijst").innerHTML = `<div class="leeg">Nog geen berichten uitgelicht. Plak in het CMS een link naar een bericht.</div>`;
+  }
+
   /* sponsors */
   const laag = (naam, hoogte) => {
     const lijst = inhoud.sponsors[naam] || [];
@@ -535,10 +582,11 @@ function toon(inhoud){
 }
 
 (async () => {
-  const [site, programma, nieuws, sponsors, uitslagen] = await Promise.all([
+  const [site, programma, nieuws, instagram, sponsors, uitslagen] = await Promise.all([
     laad("content/site.json"),
     laad("content/programma.json"),
     laad("content/nieuws.json"),
+    laad("content/instagram.json"),
     laad("content/sponsors.json"),
     laad("content/uitslagen.json")
   ]);
@@ -546,6 +594,7 @@ function toon(inhoud){
     site:      site || standaard.site,
     programma: (programma && programma.regels)  || standaard.programma,
     nieuws:    (nieuws    && nieuws.berichten)  || standaard.nieuws,
+    instagram: instagram || standaard.instagram,
     sponsors:  sponsors || standaard.sponsors,
     uitslagen: (uitslagen && uitslagen.regels)  || standaard.uitslagen
   });

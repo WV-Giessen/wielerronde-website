@@ -139,6 +139,25 @@ content:
             label: Link (optioneel)
             type: string
 
+  - name: instagram
+    label: Instagram
+    path: content/instagram.json
+    type: file
+    format: json
+    fields:
+      - name: intro
+        label: Introtekst
+        type: text
+      - name: berichten
+        label: Uitgelichte berichten
+        type: object
+        list: true
+        fields:
+          - name: link
+            label: Link naar het bericht
+            type: string
+            description: "Open het bericht in Instagram, tik op Delen en daarna op Link kopiëren. Plak hem hier. Vier berichten is genoeg."
+
   - name: sponsors
     label: Sponsoren
     path: content/sponsors.json
