@@ -1,0 +1,9 @@
+{
+  "goud": [],
+  "zilver": [],
+  "brons": [
+    { "naam": "Brons 1" }, { "naam": "Brons 2" }, { "naam": "Brons 3" },
+    { "naam": "Brons 4" }, { "naam": "Brons 5" }, { "naam": "Brons 6" },
+    { "naam": "Brons 7" }, { "naam": "Brons 8" }
+  ]
+}

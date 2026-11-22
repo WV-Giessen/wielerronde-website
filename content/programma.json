@@ -1,0 +1,9 @@
+{
+  "regels": [
+    { "tijd": "16.30", "titel": "Rabo Dikke Banden Race", "meta": "jeugd op de eigen fiets", "soort": "kids" },
+    { "tijd": "17.30", "titel": "Jeugd en nieuwelingen", "meta": "30 minuten", "soort": "gewoon" },
+    { "tijd": "18.30", "titel": "Amateurs en sportklasse", "meta": "45 minuten", "soort": "gewoon" },
+    { "tijd": "19.45", "titel": "Masters", "meta": "40 minuten", "soort": "gewoon" },
+    { "tijd": "20.45", "titel": "Elite en beloften", "meta": "hoofdwedstrijd, prijsuitreiking na afloop", "soort": "top" }
+  ]
+}
