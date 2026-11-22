@@ -6,6 +6,10 @@
     "plaats": "Parallelweg, Giessen",
     "start": "14.00 uur"
   },
+  "kaart": {
+    "locatie": "51.788630, 5.030845",
+    "zoom": "15"
+  },
   "balktekst": "Inschrijving geopend",
   "links": {
     "inschrijvenRonde": "https://mijn.knwu.nl/calendar/events/22348",
