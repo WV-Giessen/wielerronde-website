@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wielerronde van Giessen</title>
+<meta name="description" content="De Wielerronde van Giessen tijdens de jaarmarkt: wedstrijden voor amateurs, masters, elite en jeugd, plus de Rabo Dikke Banden Race.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papier:#FBFBFC; --vlak:#FFFFFF; --inkt:#14212F; --grijs:#5F6E7D; --lijn:#DCE3EA;
+  --diep:#0E3157; --nacht:#061828; --blauw:#3978BD; --oranje:#F47B20; --oranje-diep:#D9680F;
+  --zacht:#A8C3DD;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --papier:#0B1620; --vlak:#132331; --inkt:#E8EEF4; --grijs:#93A6B7; --lijn:#24394B;
+    --diep:#071D33; --nacht:#04121E; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --papier:#0B1620;--vlak:#132331;--inkt:#E8EEF4;--grijs:#93A6B7;--lijn:#24394B;
+  --diep:#071D33;--nacht:#04121E;color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(160px + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--papier);color:var(--inkt);font-family:Archivo,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:"Archivo Black",Archivo,Arial,sans-serif;font-weight:400;line-height:1.05;letter-spacing:-.02em;margin:0}
+p{margin:0 0 1em}
+a{color:inherit}
+img{max-width:100%}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+:focus-visible{outline:3px solid var(--oranje);outline-offset:3px}
+
+.aankondiging{background:var(--diep);color:#fff;font-size:14px;font-weight:600;padding:9px 0}
+.aankondiging .wrap{display:flex;justify-content:space-between;gap:12px}
+.aankondiging span:last-child{color:var(--zacht);font-weight:500}
+.nav{position:sticky;top:0;z-index:50;background:var(--papier);border-bottom:1px solid var(--lijn)}
+.nav-in{display:flex;align-items:center;gap:14px;padding:12px 0}
+.merk img{height:54px;width:auto;display:block}
+.knop{display:inline-block;background:var(--oranje);color:#0E3157;text-decoration:none;font-weight:700;
+  font-size:15px;padding:11px 20px;border:0;border-radius:3px;cursor:pointer;white-space:nowrap;
+  transition:background .2s,transform .15s}
+.knop:hover{background:var(--oranje-diep);color:#fff}
+.knop:active{transform:translateY(1px)}
+.knop-licht{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
+.knop-licht:hover{background:rgba(255,255,255,.14);color:#fff}
+.nav .knop{margin-left:auto}
+.sprongen{position:sticky;top:79px;z-index:49;border-bottom:1px solid var(--lijn);background:var(--papier)}
+.sprongen .rij{display:flex;gap:8px;overflow-x:auto;padding:12px 20px;scrollbar-width:none}
+.sprongen .rij::-webkit-scrollbar{display:none}
+.sprong{flex:0 0 auto;text-decoration:none;font-weight:600;font-size:14.5px;padding:9px 16px;
+  border:1.5px solid var(--lijn);border-radius:999px;color:var(--inkt);background:var(--vlak);
+  transition:border-color .2s,color .2s,background .2s}
+.sprong:hover{border-color:var(--oranje);color:var(--oranje-diep)}
+.sprong[aria-current="true"]{background:var(--diep);border-color:var(--diep);color:#fff}
+@media(min-width:1180px){.sprongen .rij{max-width:1120px;margin-inline:auto;padding:12px 0}}
+
+.hero{position:relative;overflow:hidden;background:var(--nacht);color:#fff;display:flex;align-items:flex-end}
+.hero-foto{position:absolute;inset:-14% 0;
+  background:
+    repeating-linear-gradient(118deg,rgba(255,255,255,.055) 0 2px,transparent 2px 46px),
+    repeating-linear-gradient(118deg,rgba(244,123,32,.10) 0 4px,transparent 4px 180px),
+    linear-gradient(160deg,#1E5A94 0%,#0E3157 45%,#061828 100%);
+  will-change:transform}
+.hero-foto::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(6,24,40,.12) 0%,rgba(6,24,40,.3) 45%,rgba(6,24,40,.9) 100%)}
+.streek{position:absolute;left:-2%;right:-2%;bottom:-2px;height:120px;background:var(--oranje);
+  clip-path:polygon(0 44%,100% 0,100% 100%,0 100%)}
+.fotonoot{position:absolute;top:22px;left:0;right:0;font-size:14px;color:rgba(255,255,255,.6)}
+.hero-in{position:relative;padding:140px 0 140px}
+.hero-logo{margin:0 0 28px}
+.hero-logo img{width:min(100%,560px);filter:drop-shadow(0 12px 32px rgba(0,0,0,.45))}
+.streepje{width:96px;height:5px;background:var(--oranje);border:0;margin:0 0 16px}
+.wanneer{font-weight:600;font-size:clamp(16px,4vw,21px);margin:0 0 26px}
+.acties{display:flex;flex-wrap:wrap;gap:12px}
+
+.aftellen{background:var(--blauw);color:#fff;position:relative}
+.aftellen .wrap{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 26px;padding:24px 0}
+.aftellen .label{font-size:13px;font-weight:700;color:#DCEAF7;width:100%;letter-spacing:.14em}
+.aftellen b{font-family:"Archivo Black",sans-serif;font-weight:400;font-size:clamp(28px,8vw,44px);letter-spacing:-.02em}
+.aftellen .eenheid{font-size:15px;color:#DCEAF7;margin-left:5px}
+.zegel{position:absolute;right:26px;top:-54px;width:110px;height:110px;border-radius:50%;
+  background:#fff;border:5px solid #fff;box-shadow:0 10px 28px rgba(0,0,0,.3);overflow:hidden}
+.zegel img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:700px){.zegel{width:82px;height:82px;top:-40px;right:16px}}
+
+section{padding:62px 0}
+.kop{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:28px}
+.kop h2{font-size:clamp(26px,6vw,38px);text-transform:uppercase}
+.kop p{color:var(--grijs);font-size:15px;margin:0}
+
+.tegels{display:grid;gap:14px}
+.tegel{position:relative;display:block;text-decoration:none;color:#fff;min-height:230px;overflow:hidden;
+  background:linear-gradient(150deg,#2A6BA8,#061828)}
+.tegel::before{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(118deg,rgba(255,255,255,.08) 0 2px,transparent 2px 40px);
+  mix-blend-mode:screen;transition:transform .6s ease}
+.tegel::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(6,24,40,.92),rgba(6,24,40,0) 62%)}
+.tegel:hover::before{transform:scale(1.1)}
+.tegel .tekst{position:absolute;left:22px;right:22px;bottom:20px;z-index:1}
+.tegel h3{font-size:24px}
+.tegel span{display:block;color:#C3D8EB;font-size:15px;margin-top:4px}
+.tegel i{display:block;width:46px;height:4px;background:var(--oranje);margin-top:14px}
+@media(min-width:760px){.tegels{grid-template-columns:repeat(3,1fr)}.tegel{min-height:300px}}
+
+.goud{background:var(--vlak);border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn);padding:34px 0}
+.goud .titel{text-align:center;font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--grijs);margin-bottom:22px}
+.carrousel{overflow:hidden;position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 70px,#000 calc(100% - 70px),transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 70px,#000 calc(100% - 70px),transparent)}
+.spoor{display:flex;align-items:center;gap:54px;width:max-content;animation:schuif 36s linear infinite}
+.carrousel:hover .spoor{animation-play-state:paused}
+.spoor img{height:62px;width:auto}
+@keyframes schuif{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .spoor{animation:none;flex-wrap:wrap;width:auto;justify-content:center;gap:28px}
+  .carrousel{-webkit-mask-image:none;mask-image:none}
+}
+
+.rij{display:grid;grid-template-columns:92px 1fr;align-items:center;gap:2px 14px;padding:18px 20px;background:#EFF2F5}
+.rij + .rij{margin-top:10px}
+.rij .tijd{font-family:"Archivo Black",sans-serif;font-size:24px}
+.rij h3{font-size:19px}
+.rij .meta{grid-column:2;color:var(--grijs);font-size:14.5px}
+.rij.kids{background:var(--oranje);color:#4A2305}
+.rij.kids .meta{color:#7A3C09}
+.rij.top{background:var(--diep);color:#fff}
+.rij.top .meta{color:var(--zacht)}
+.voorbehoud{color:var(--grijs);font-size:14px;margin-top:16px}
+
+.dbr{background:var(--vlak);border:1px solid var(--lijn);border-left:6px solid var(--oranje);padding:30px 26px}
+.feitjes{display:grid;gap:14px;margin:22px 0 24px;padding:0;list-style:none}
+.feitjes li{border-top:1px solid var(--lijn);padding-top:12px}
+.feitjes b{display:block;font-family:"Archivo Black",sans-serif;font-weight:400;font-size:17px}
+.feitjes span{color:var(--grijs);font-size:14.5px}
+@media(min-width:720px){.feitjes{grid-template-columns:repeat(3,1fr);gap:20px}.dbr{padding:38px 36px}}
+
+.parcours{display:grid;gap:24px}
+.kaart{background:linear-gradient(150deg,#2A6BA8,#0E3157);min-height:250px;display:grid;place-items:center;
+  color:#C3D8EB;font-size:14.5px;text-align:center;padding:20px}
+.parcours ul{margin:0;padding-left:20px;color:var(--grijs)}
+.parcours li{margin-bottom:9px}
+.parcours li b{color:var(--inkt)}
+@media(min-width:820px){.parcours{grid-template-columns:1.05fr .95fr}}
+
+.leeg{border:1px dashed var(--lijn);padding:30px 22px;text-align:center;color:var(--grijs);font-size:15px}
+.nieuws{display:grid;gap:24px}
+.bericht{text-decoration:none;display:block}
+.bericht .beeld{height:170px;width:100%;object-fit:cover;background:linear-gradient(150deg,#2A6BA8,#0E3157);margin-bottom:14px;display:block}
+.uitslag{border-top:3px solid var(--oranje);padding-top:12px;margin-bottom:22px}
+.uitslag h3{font-size:19px;margin-bottom:6px}
+.uitslag ol{margin:0;padding-left:22px;color:var(--grijs)}
+.bericht time{font-size:13.5px;color:var(--oranje-diep);font-weight:700}
+.bericht h3{font-size:20px;margin:6px 0 0}
+@media(min-width:760px){.nieuws{grid-template-columns:repeat(3,1fr)}}
+
+.overig{background:var(--vlak);border-top:1px solid var(--lijn)}
+.laag{margin-bottom:34px}
+.laag h3{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--grijs);font-family:Archivo,sans-serif;margin-bottom:16px}
+.raster{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.raster .vak{border:1px solid var(--lijn);background:var(--papier);display:grid;place-items:center;padding:14px;min-height:84px}
+.raster img{max-height:46px;width:auto}
+.namen{display:grid;grid-template-columns:repeat(2,1fr);gap:0 24px}
+.namen div{border-top:1px solid var(--lijn);padding:10px 0;font-weight:600;font-size:15.5px}
+.laden{color:var(--grijs);font-size:14.5px;padding:10px 0}
+@media(min-width:620px){.raster{grid-template-columns:repeat(4,1fr)}.namen{grid-template-columns:repeat(4,1fr)}}
+
+.contact{display:grid;gap:28px}
+form{display:grid;gap:14px}
+label{font-weight:600;font-size:14.5px;display:block;margin-bottom:5px}
+input,textarea{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--lijn);
+  background:var(--vlak);color:var(--inkt);border-radius:3px}
+textarea{min-height:120px;resize:vertical}
+@media(min-width:820px){.contact{grid-template-columns:1fr 1fr;gap:44px}}
+
+footer{background:var(--diep);color:var(--zacht);padding:46px 0 54px;font-size:15px;position:relative;overflow:hidden}
+footer .wrap{position:relative}
+footer img.merkje{height:70px;margin-bottom:18px}
+footer a{color:#fff}
+.waterkoe{position:absolute;right:-24px;bottom:-44px;width:250px;opacity:.12;pointer-events:none}
+
+.op{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.3,1)}
+.op.zichtbaar{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .op{opacity:1;transform:none;transition:none}
+  .hero-foto{transform:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="aankondiging">
+  <div class="wrap"><span id="balkLinks">—</span><span id="balkRechts">—</span></div>
+</div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="merk" href="#top"><img src="images/logo.png" alt="Wielerronde van Giessen"></a>
+    <a class="knop" href="#inschrijven">Inschrijven</a>
+  </div>
+</header>
+
+<nav class="sprongen" aria-label="Snel naar">
+  <div class="rij">
+    <a class="sprong" href="#programma">Programma</a>
+    <a class="sprong" href="#dikkebanden">Dikke Banden Race</a>
+    <a class="sprong" href="#parcours">Parcours</a>
+    <a class="sprong" href="#uitslagen">Uitslagen</a>
+    <a class="sprong" href="#nieuws">Nieuws</a>
+    <a class="sprong" href="#sponsors">Sponsors</a>
+    <a class="sprong" href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main id="top">
+
+<section class="hero" style="padding:0">
+  <div class="hero-foto" id="heroFoto"></div>
+  <div class="streek"></div>
+  <div class="wrap fotonoot">hier komt een foto van de koers</div>
+  <div class="wrap hero-in">
+    <h1 class="hero-logo"><img src="images/logo.png" alt="Wielerronde van Giessen"></h1>
+    <hr class="streepje">
+    <p class="wanneer" id="wanneer">—</p>
+    <div class="acties" id="inschrijven">
+      <a class="knop" id="ctaRonde" href="#">Inschrijven wielerronde</a>
+      <a class="knop knop-licht" id="ctaDbr" href="#">Dikke Banden Race</a>
+    </div>
+  </div>
+</section>
+
+<div class="aftellen">
+  <div class="zegel"><img src="images/koe.png" alt=""></div>
+  <div class="wrap">
+    <span class="label">NOG</span>
+    <span><b id="dDagen">—</b><span class="eenheid">dagen</span></span>
+    <span><b id="dUren">—</b><span class="eenheid">uur</span></span>
+    <span><b id="dMin">—</b><span class="eenheid">min</span></span>
+  </div>
+</div>
+
+<section>
+  <div class="wrap tegels op">
+    <a class="tegel" href="#programma"><div class="tekst"><h3>Wielerronde</h3><span>vijf wedstrijden</span><i></i></div></a>
+    <a class="tegel" href="#dikkebanden"><div class="tekst"><h3>Dikke Banden</h3><span>race voor de jeugd</span><i></i></div></a>
+    <a class="tegel" href="#parcours"><div class="tekst"><h3>Parcours</h3><span>route en parkeren</span><i></i></div></a>
+  </div>
+</section>
+
+<div class="goud">
+  <div class="titel">GOUDSPONSOREN</div>
+  <div class="carrousel"><div class="spoor" id="spoor"></div></div>
+</div>
+
+<section id="programma">
+  <div class="wrap op">
+    <div class="kop"><h2>Programma</h2><p>van de jongste renners tot de laatste ronde</p></div>
+    <div id="programmaLijst"></div>
+    <p class="voorbehoud" id="programmaNoot"></p>
+  </div>
+</section>
+
+<section id="dikkebanden">
+  <div class="wrap op">
+    <div class="dbr">
+      <h2 style="font-size:clamp(24px,5.4vw,32px);margin-bottom:12px">Rabo Dikke Banden Race</h2>
+      <p id="dbrTekst">—</p>
+      <ul class="feitjes">
+        <li><b id="dbrLeeftijd">—</b><span>Leeftijd</span></li>
+        <li><b>Eigen fiets</b><span>Geen racefiets of licentie nodig</span></li>
+        <li><b id="dbrKosten">—</b><span>Inschrijfgeld</span></li>
+      </ul>
+      <a class="knop" id="dbrKnop" href="#">Meld je kind aan</a>
+    </div>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap op">
+    <div class="kop"><h2>Parcours en parkeren</h2></div>
+    <div class="parcours">
+      <div class="kaart">Hier komt de kaart van het parcours<br>(plattegrond of ingesloten Google&nbsp;Maps)</div>
+      <ul>
+        <li><b>Start en finish</b> aan de Parallelweg, naast de feesttent.</li>
+        <li><b>Rondelengte</b> nog in te vullen, met het aantal ronden per categorie.</li>
+        <li><b>Parkeren</b> aanwijzingen voor bezoekers en voor renners met aanhanger.</li>
+        <li><b>Afgesloten wegen</b> welke straten wanneer dicht zijn, voor de buurt.</li>
+        <li><b>Inschrijving en kleedruimte</b> locatie op het terrein.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="uitslagen">
+  <div class="wrap op">
+    <div class="kop"><h2>Uitslagen</h2><p>tijdens de dag bijgewerkt</p></div>
+    <div id="uitslagenBlok"></div>
+  </div>
+</section>
+
+<section id="nieuws">
+  <div class="wrap op">
+    <div class="kop"><h2>Nieuws</h2></div>
+    <div class="nieuws" id="nieuwsLijst"></div>
+  </div>
+</section>
+
+<section id="sponsors" class="overig">
+  <div class="wrap op">
+    <div class="kop"><h2>Sponsors</h2><p>zonder hen geen ronde</p></div>
+    <div class="laag"><h3>ZILVER</h3><div class="raster" id="zilver"></div></div>
+    <div class="laag"><h3>BRONS</h3><div class="namen" id="brons"></div></div>
+    <p class="voorbehoud">Sponsor worden of een prijs beschikbaar stellen? Neem contact op met de organisatie.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap op">
+    <div class="kop"><h2>Contact</h2></div>
+    <div class="contact">
+      <div>
+        <p>Vragen over inschrijven, het parcours of de dag zelf? Stuur een bericht, dan antwoordt een van ons.</p>
+        <p>Rechtstreeks mailen kan ook: <a id="mailLink" href="#" style="font-weight:600">—</a></p>
+        <p style="color:var(--grijs);font-size:15px">De wielerronde is onderdeel van de jaarmarkt in Giessen.</p>
+      </div>
+      <form id="contactForm">
+        <div><label for="naam">Naam</label><input id="naam" required></div>
+        <div><label for="email">E-mailadres</label><input id="email" type="email" required></div>
+        <div><label for="bericht">Bericht</label><textarea id="bericht" required></textarea></div>
+        <div><button class="knop" type="submit">Verstuur bericht</button></div>
+        <p id="formNoot" style="font-size:14px;color:var(--grijs);margin:0"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <img class="waterkoe" src="images/koe.png" alt="">
+  <div class="wrap">
+    <img class="merkje" src="images/logo.png" alt="Wielerronde van Giessen">
+    <div>Parallelweg, Giessen</div>
+    <div><a id="footMail" href="#">—</a></div>
+    <div><a id="footIg" href="#" style="color:var(--oranje);font-weight:600">@wielerrondegiessen</a></div>
+    <div style="margin-top:20px;font-size:14px">Georganiseerd door vrijwilligers. © <span id="jaartal"></span></div>
+  </div>
+</footer>
+
+<script>
+/* ==================================================================
+   INHOUD
+
+   De teksten staan niet meer in dit bestand, maar in de map content/.
+   Die bestanden worden beheerd via Pages CMS; aan deze code hoeft
+   niemand iets te veranderen.
+
+     content/site.json        datum, links, Dikke Banden Race
+     content/programma.json   de wedstrijden
+     content/nieuws.json      nieuwsberichten
+     content/sponsors.json    goud, zilver, brons
+     content/uitslagen.json   uitslagen per categorie
+     content/images/          foto's en sponsorlogo's
+
+   Lukt het laden niet, dan valt de site terug op de voorbeelden
+   hieronder, zodat er nooit een lege pagina staat.
+================================================================== */
+const standaard = {
+  site:{
+    editie:{ jaar:"2027", datum:"2027-09-09T16:30:00", datumLang:"Donderdag 9 september 2027",
+             plaats:"Parallelweg, Giessen", start:"16.30 uur" },
+    balktekst:"Inschrijving geopend",
+    links:{ inschrijvenRonde:"#", inschrijvenDbr:"#",
+            instagram:"https://www.instagram.com/wielerrondegiessen/",
+            email:"info@wielerrondegiessen.nl" },
+    dbr:{ leeftijd:"6 t/m 12 jaar", kosten:"Nader te bepalen",
+          tekst:"Koersen op je eigen fiets, met je eigen dikke banden. Geen racefiets nodig, geen licentie, wel een helm." },
+    programmaNoot:"Voorlopige tijden."
+  },
+  programma:[
+    { tijd:"16.30", titel:"Rabo Dikke Banden Race", meta:"jeugd op de eigen fiets", soort:"kids" },
+    { tijd:"18.30", titel:"Amateurs en sportklasse", meta:"45 minuten", soort:"gewoon" },
+    { tijd:"20.45", titel:"Elite en beloften", meta:"hoofdwedstrijd", soort:"top" }
+  ],
+  nieuws:[],
+  sponsors:{ goud:[], zilver:[], brons:[] },
+  uitslagen:[],
+  reserve:{
+    goud:["Hoofdsponsor","Bouwbedrijf","Rabobank","Installatie BV","Transport","Garage"],
+    zilver:["Zilver 1","Zilver 2","Zilver 3","Zilver 4","Zilver 5","Zilver 6","Zilver 7","Zilver 8"]
+  }
+};
+
+const $ = id => document.getElementById(id);
+
+/* Grijs vakje met de naam erin, zolang er nog geen logo is. */
+function plaatshouder(naam, h){
+  const w = Math.round(h * 2.6);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">`
+    + `<rect width="100%" height="100%" fill="none" stroke="#C9D3DC" stroke-width="2"/>`
+    + `<text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" `
+    + `font-family="Archivo,Arial" font-size="${Math.round(h*0.26)}" fill="#8A98A6">${naam}</text></svg>`;
+  return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+}
+
+async function laad(pad){
+  try {
+    const antwoord = await fetch(pad, { cache:"no-cache" });
+    if (!antwoord.ok) throw new Error(antwoord.status);
+    return await antwoord.json();
+  } catch (e) {
+    console.warn("Kon " + pad + " niet laden:", e.message);
+    return null;
+  }
+}
+
+function toon(inhoud){
+  const e = inhoud.site.editie, l = inhoud.site.links;
+
+  $("wanneer").textContent = `${e.datumLang} · ${e.plaats} · eerste start ${e.start}`;
+  $("balkLinks").textContent = inhoud.site.balktekst || "";
+  $("balkRechts").textContent = e.datumLang.toLowerCase();
+  $("jaartal").textContent = e.jaar;
+  $("ctaRonde").href = l.inschrijvenRonde;
+  $("ctaDbr").href = $("dbrKnop").href = l.inschrijvenDbr;
+  $("footIg").href = l.instagram;
+  $("mailLink").href = $("footMail").href = "mailto:" + l.email;
+  $("mailLink").textContent = $("footMail").textContent = l.email;
+  $("dbrLeeftijd").textContent = inhoud.site.dbr.leeftijd;
+  $("dbrKosten").textContent = inhoud.site.dbr.kosten;
+  $("dbrTekst").textContent = inhoud.site.dbr.tekst;
+
+  /* afteller */
+  function aftellen(){
+    let ms = new Date(e.datum) - new Date();
+    if (!isFinite(ms) || ms < 0) ms = 0;
+    $("dDagen").textContent = Math.floor(ms / 864e5);
+    $("dUren").textContent  = String(Math.floor(ms / 36e5) % 24).padStart(2,"0");
+    $("dMin").textContent   = String(Math.floor(ms / 6e4) % 60).padStart(2,"0");
+  }
+  aftellen(); setInterval(aftellen, 30000);
+
+  /* programma */
+  $("programmaLijst").innerHTML = inhoud.programma.map(r => `
+    <div class="rij ${r.soort === "gewoon" ? "" : (r.soort || "")}">
+      <div class="tijd">${r.tijd}</div>
+      <h3>${r.titel}</h3>
+      <div class="meta">${r.meta || ""}</div>
+    </div>`).join("");
+  $("programmaNoot").textContent = inhoud.site.programmaNoot || "";
+
+  /* uitslagen */
+  $("uitslagenBlok").innerHTML = inhoud.uitslagen.length
+    ? inhoud.uitslagen.map(u => `
+        <div class="uitslag">
+          <h3>${u.categorie}</h3>
+          <ol><li>${u.eerste || ""}</li><li>${u.tweede || ""}</li><li>${u.derde || ""}</li></ol>
+        </div>`).join("")
+    : `<div class="leeg">De uitslagen van ${e.jaar} verschijnen hier op de dag zelf, kort na elke wedstrijd.</div>`;
+
+  /* nieuws */
+  $("nieuwsLijst").innerHTML = inhoud.nieuws.length
+    ? inhoud.nieuws.map(n => `
+        <a class="bericht" href="${n.link || "#"}">
+          ${n.beeld ? `<img class="beeld" src="${n.beeld}" alt="" loading="lazy">` : `<div class="beeld"></div>`}
+          <time>${n.datum || ""}</time><h3>${n.titel}</h3>
+        </a>`).join("")
+    : `<div class="leeg">Nog geen berichten.</div>`;
+
+  /* sponsors */
+  const laag = (naam, hoogte) => {
+    const lijst = inhoud.sponsors[naam] || [];
+    return lijst.length
+      ? lijst.map(s => ({ naam:s.naam || "", src:s.logo || plaatshouder(s.naam || "", hoogte), link:s.link }))
+      : standaard.reserve[naam].map(n => ({ naam:n, src:plaatshouder(n, hoogte) }));
+  };
+  const plaatje = (s, extra) =>
+    `<img src="${s.src}" alt="${s.naam}" loading="lazy">`;
+
+  const goud = laag("goud", 62).map(s => plaatje(s)).join("");
+  $("spoor").innerHTML = goud + goud;   /* twee keer, zodat de lus naadloos doorloopt */
+  $("zilver").innerHTML = laag("zilver", 46).map(s => `<div class="vak">${plaatje(s)}</div>`).join("");
+
+  const brons = inhoud.sponsors.brons || [];
+  $("brons").innerHTML = brons.length
+    ? brons.map(b => `<div>${b.naam}</div>`).join("")
+    : `<div class="laden">Nog geen bronssponsoren ingevoerd.</div>`;
+
+  /* contactformulier opent de mailclient, dus geen server nodig */
+  $("contactForm").addEventListener("submit", ev => {
+    ev.preventDefault();
+    const body = `${$("bericht").value}\n\n—\n${$("naam").value}\n${$("email").value}`;
+    window.location.href = "mailto:" + l.email
+      + "?subject=" + encodeURIComponent("Vraag via de website — " + $("naam").value)
+      + "&body=" + encodeURIComponent(body);
+    $("formNoot").textContent = "Je mailprogramma wordt geopend met het bericht erin.";
+  });
+}
+
+(async () => {
+  const [site, programma, nieuws, sponsors, uitslagen] = await Promise.all([
+    laad("content/site.json"),
+    laad("content/programma.json"),
+    laad("content/nieuws.json"),
+    laad("content/sponsors.json"),
+    laad("content/uitslagen.json")
+  ]);
+  toon({
+    site:      site || standaard.site,
+    programma: (programma && programma.regels)  || standaard.programma,
+    nieuws:    (nieuws    && nieuws.berichten)  || standaard.nieuws,
+    sponsors:  sponsors || standaard.sponsors,
+    uitslagen: (uitslagen && uitslagen.regels)  || standaard.uitslagen
+  });
+})();
+
+/* ---------- scroll-effecten ---------- */
+const rustig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if ("IntersectionObserver" in window && !rustig){
+  const kijker = new IntersectionObserver((items, obs) => {
+    items.forEach(i => { if (i.isIntersecting){ i.target.classList.add("zichtbaar"); obs.unobserve(i.target); } });
+  }, { threshold:.1, rootMargin:"0px 0px -60px 0px" });
+  document.querySelectorAll(".op").forEach(el => kijker.observe(el));
+} else {
+  document.querySelectorAll(".op").forEach(el => el.classList.add("zichtbaar"));
+}
+
+const foto = $("heroFoto");
+const hero = document.querySelector(".hero");
+const fijneMuis = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+let bezig = false;
+if (!rustig && fijneMuis){
+  addEventListener("scroll", () => {
+    if (bezig) return;
+    bezig = true;
+    requestAnimationFrame(() => {
+      const hoogte = hero.offsetHeight;
+      if (scrollY < hoogte) foto.style.transform = `translate3d(0,${scrollY * 0.22}px,0)`;
+      bezig = false;
+    });
+  }, { passive:true });
+}
+
+const knoppen = [...document.querySelectorAll(".sprong")];
+const balk = document.querySelector(".sprongen .rij");
+
+/* De knoppenbalk alleen horizontaal verschuiven. scrollIntoView gebruiken we
+   bewust niet: dat kan ook de pagina zelf verplaatsen en gaat dan vechten met
+   de scroll van de bezoeker. */
+function schuifNaar(k){
+  if (!balk) return;
+  const doel = k.offsetLeft - (balk.clientWidth - k.offsetWidth) / 2;
+  const links = Math.max(0, Math.min(doel, balk.scrollWidth - balk.clientWidth));
+  if (Math.abs(links - balk.scrollLeft) < 8) return;
+  balk.scrollTo({ left: links, behavior: rustig ? "auto" : "smooth" });
+}
+
+if ("IntersectionObserver" in window){
+  const volger = new IntersectionObserver(items => {
+    items.forEach(i => {
+      if (!i.isIntersecting) return;
+      const k = knoppen.find(k => k.getAttribute("href") === "#" + i.target.id);
+      if (!k || k.getAttribute("aria-current") === "true") return;
+      knoppen.forEach(x => x.removeAttribute("aria-current"));
+      k.setAttribute("aria-current","true");
+      schuifNaar(k);
+    });
+  }, { rootMargin:"-45% 0px -45% 0px" });
+  knoppen.map(k => document.querySelector(k.getAttribute("href")))
+         .filter(Boolean).forEach(s => volger.observe(s));
+}
+</script>
+</body>
+</html>

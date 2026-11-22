@@ -1,0 +1,55 @@
+WIELERRONDE VAN GIESSEN — WEBSITE
+=================================
+
+INHOUD VAN DEZE MAP
+-------------------
+index.html          De website zelf. De teksten staan hier niet meer
+                    in; die komen uit de map content/.
+images/             Logo en embleem.
+
+sponsors/zilver/    Logo's van de zilversponsoren (nu nog leeg).
+
+
+UPLOADEN NAAR CLOUDFLARE PAGES
+------------------------------
+1. Ga naar dash.cloudflare.com en maak een gratis account.
+2. Kies in het menu: Compute (Workers & Pages) > Create > Pages >
+   Upload assets.
+3. Geef het project een naam, bijvoorbeeld wielerronde-giessen.
+4. Sleep deze HELE map naar het uploadvak (dus de map zelf, niet
+   alleen index.html — anders missen de afbeeldingen).
+5. Klik op Deploy.
+6. Je krijgt een adres zoals wielerronde-giessen.pages.dev.
+   Daarmee kun je alles controleren voordat het domein eraan hangt.
+
+Een nieuwe versie uploaden gaat hetzelfde: opnieuw de map erin
+slepen. De oude versie blijft bewaard en kun je terugzetten.
+
+
+EIGEN DOMEIN ERAAN KOPPELEN
+---------------------------
+Volg de DNS-checklist. Kort samengevat: domein toevoegen in
+Cloudflare, nameservers bij Strato wijzigen, daarna in het
+Pages-project onder Custom domains zowel wielerrondegiessen.nl
+als www.wielerrondegiessen.nl toevoegen.
+
+
+TEKSTEN AANPASSEN
+-----------------
+Via Pages CMS, zie STAPPENPLAN-CMS.txt. Wie liever met de hand
+werkt, kan de bestanden in content/ met een teksteditor openen.
+
+
+SPONSORLOGO'S TOEVOEGEN
+-----------------------
+Via het CMS, bij Sponsoren. Goud en zilver krijgen een logo,
+brons alleen een naam. Zie STAPPENPLAN-CMS.txt.
+
+
+WAT ER NOG MOET GEBEUREN
+------------------------
+- Echte datum en programma invullen (nu staan er voorlopige tijden)
+- Inschrijflink vernieuwen (wijst nu naar het KNWU-event van 2026)
+- Foto's toevoegen; de blauwe vlakken zijn plaatshouders
+- Kaart van het parcours toevoegen
+- Controleren of info@wielerrondegiessen.nl het juiste adres is

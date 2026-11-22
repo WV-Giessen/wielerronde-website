@@ -1,0 +1,83 @@
+VAN HANDMATIG UPLOADEN NAAR BEHEER VIA PAGES CMS
+=================================================
+Eenmalig werk, ongeveer een half uur. Daarna hoeft niemand
+nog bestanden te uploaden.
+
+
+STAP 1 — GITHUB-OPSLAGPLAATS AANMAKEN
+-------------------------------------
+1. Maak een gratis account op github.com. Gebruik een gedeeld
+   mailadres van de organisatie, niet een privéadres.
+2. Klik op New repository.
+3. Naam: wielerronde-giessen. Kies Public.
+4. Zet GEEN vinkjes bij README of .gitignore.
+5. Klik op Create repository.
+6. Kies op het volgende scherm "uploading an existing file".
+7. Sleep de INHOUD van deze map erin (dus index.html, .pages.yml,
+   content/, images/ — niet de map zelf).
+8. Klik op Commit changes.
+
+Let op: .pages.yml begint met een punt en wordt door Windows en
+macOS soms verborgen. Controleer na het uploaden of het bestand
+echt in de lijst op GitHub staat. Zonder dat bestand werkt het
+CMS niet.
+
+
+STAP 2 — CLOUDFLARE AAN GITHUB KOPPELEN
+---------------------------------------
+1. Verwijder het bestaande project dat je met Upload assets hebt
+   gemaakt. Dat kan niet omgebouwd worden.
+2. Maak een nieuw project: Workers & Pages > Create > Pages >
+   Connect to Git.
+3. Geef Cloudflare toegang tot de opslagplaats.
+4. Build settings: laat Framework preset op None staan, laat het
+   build command leeg en zet de output directory op / (of laat
+   leeg). De site hoeft niet gebouwd te worden.
+5. Save and Deploy.
+
+Vanaf nu publiceert Cloudflare automatisch bij elke wijziging in
+de opslagplaats, dus ook bij elke opslagactie in het CMS.
+
+
+STAP 3 — PAGES CMS KOPPELEN
+---------------------------
+1. Ga naar app.pagescms.org en meld je aan met het GitHub-account.
+2. Koppel de opslagplaats wielerronde-giessen.
+3. Pages CMS leest .pages.yml en toont de onderdelen:
+   Algemene gegevens, Programma, Nieuws, Sponsoren, Uitslagen.
+
+
+STAP 4 — DE ANDERE BEHEERDERS TOEVOEGEN
+---------------------------------------
+Pages CMS kan medewerkers per e-mail uitnodigen. Zij hebben dan
+geen eigen GitHub-account nodig. Doe dat vanuit de instellingen
+van het project in Pages CMS.
+
+
+WAT DE BEHEERDERS KUNNEN DOEN
+-----------------------------
+Algemene gegevens  datum, starttijd, inschrijflinks, e-mailadres
+Programma          wedstrijden toevoegen, tijden wijzigen, volgorde
+                   aanpassen, kleur per regel kiezen
+Nieuws             berichten met een afbeelding
+Sponsoren          goud en zilver met logo-upload, brons alleen naam
+Uitslagen          per categorie de eerste drie
+
+Een wijziging staat ongeveer een minuut later op de site.
+
+
+SPONSORLOGO'S
+-------------
+PNG met transparante achtergrond, minimaal 400 px breed.
+Uploaden gaat via het logoveld in het CMS zelf; de bestanden komen
+automatisch in content/images/ terecht.
+
+Zolang er geen goud- of zilversponsoren zijn ingevoerd, toont de
+site grijze plaatshouders zodat de opmaak zichtbaar blijft.
+
+
+LET OP BIJ LOKAAL OPENEN
+------------------------
+Open je index.html met een dubbelklik vanaf je eigen computer, dan
+blijft de inhoud leeg: browsers mogen dan geen bestanden inlezen.
+Dat is geen fout. Op Cloudflare werkt het gewoon.

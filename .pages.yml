@@ -1,0 +1,192 @@
+media:
+  input: content/images
+  output: /content/images
+  categories: [image]
+
+content:
+  - name: site
+    label: Algemene gegevens
+    path: content/site.json
+    type: file
+    format: json
+    fields:
+      - name: editie
+        label: Editie
+        type: object
+        fields:
+          - name: jaar
+            label: Jaar
+            type: string
+          - name: datum
+            label: Datum en tijd eerste start
+            type: string
+            description: "Voor de afteller. Schrijf precies zo: 2027-09-09T16:30:00"
+          - name: datumLang
+            label: Datum voluit
+            type: string
+            description: "Bijvoorbeeld: Donderdag 9 september 2027"
+          - name: plaats
+            label: Plaats
+            type: string
+          - name: start
+            label: Eerste start
+            type: string
+            description: "Bijvoorbeeld: 16.30 uur"
+      - name: balktekst
+        label: Tekst in de bovenste balk
+        type: string
+      - name: links
+        label: Links
+        type: object
+        fields:
+          - name: inschrijvenRonde
+            label: Inschrijven wielerronde
+            type: string
+          - name: inschrijvenDbr
+            label: Inschrijven Dikke Banden Race
+            type: string
+          - name: instagram
+            label: Instagram
+            type: string
+          - name: email
+            label: E-mailadres
+            type: string
+      - name: dbr
+        label: Dikke Banden Race
+        type: object
+        fields:
+          - name: leeftijd
+            label: Leeftijd
+            type: string
+          - name: kosten
+            label: Inschrijfgeld
+            type: string
+          - name: tekst
+            label: Toelichting
+            type: text
+      - name: programmaNoot
+        label: Opmerking onder het programma
+        type: text
+
+  - name: programma
+    label: Programma
+    path: content/programma.json
+    type: file
+    format: json
+    fields:
+      - name: regels
+        label: Wedstrijden
+        type: object
+        list: true
+        fields:
+          - name: tijd
+            label: Starttijd
+            type: string
+            description: "Bijvoorbeeld: 18.30"
+          - name: titel
+            label: Categorie
+            type: string
+          - name: meta
+            label: Toelichting
+            type: string
+          - name: soort
+            label: Opmaak
+            type: select
+            options:
+              values:
+                - { value: gewoon, label: Gewoon }
+                - { value: kids, label: Oranje (Dikke Banden Race) }
+                - { value: top, label: Donkerblauw (hoofdwedstrijd) }
+
+  - name: nieuws
+    label: Nieuws
+    path: content/nieuws.json
+    type: file
+    format: json
+    fields:
+      - name: berichten
+        label: Berichten
+        type: object
+        list: true
+        fields:
+          - name: datum
+            label: Datum
+            type: string
+            description: "Bijvoorbeeld: 12 juni"
+          - name: titel
+            label: Kop
+            type: string
+          - name: beeld
+            label: Afbeelding
+            type: image
+          - name: link
+            label: Link (optioneel)
+            type: string
+
+  - name: sponsors
+    label: Sponsoren
+    path: content/sponsors.json
+    type: file
+    format: json
+    fields:
+      - name: goud
+        label: Goud (logo in de lopende band)
+        type: object
+        list: true
+        fields:
+          - name: naam
+            label: Bedrijfsnaam
+            type: string
+          - name: logo
+            label: Logo
+            type: image
+            description: "PNG met transparante achtergrond, minimaal 400 px breed"
+          - name: link
+            label: Website (optioneel)
+            type: string
+      - name: zilver
+        label: Zilver (logo in het raster)
+        type: object
+        list: true
+        fields:
+          - name: naam
+            label: Bedrijfsnaam
+            type: string
+          - name: logo
+            label: Logo
+            type: image
+          - name: link
+            label: Website (optioneel)
+            type: string
+      - name: brons
+        label: Brons (alleen de naam)
+        type: object
+        list: true
+        fields:
+          - name: naam
+            label: Bedrijfsnaam
+            type: string
+
+  - name: uitslagen
+    label: Uitslagen
+    path: content/uitslagen.json
+    type: file
+    format: json
+    fields:
+      - name: regels
+        label: Uitslag per categorie
+        type: object
+        list: true
+        fields:
+          - name: categorie
+            label: Categorie
+            type: string
+          - name: eerste
+            label: Eerste
+            type: string
+          - name: tweede
+            label: Tweede
+            type: string
+          - name: derde
+            label: Derde
+            type: string
