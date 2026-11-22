@@ -144,6 +144,10 @@ section{padding:62px 0}
 .parcours{display:grid;gap:24px}
 .kaart{background:linear-gradient(150deg,#2A6BA8,#0E3157);min-height:250px;display:grid;place-items:center;
   color:#C3D8EB;font-size:14.5px;text-align:center;padding:20px}
+.kaart.gevuld{display:block;padding:0;background:var(--vlak);min-height:0}
+.kaart iframe{display:block;width:100%;height:340px;border:0}
+#kaartLinkWrap{margin:12px 0 0;font-size:15px;font-weight:600}
+#kaartLinkWrap a{color:var(--oranje-diep)}
 .parcours ul{margin:0;padding-left:20px;color:var(--grijs)}
 .parcours li{margin-bottom:9px}
 .parcours li b{color:var(--inkt)}
@@ -286,7 +290,10 @@ footer a{color:#fff}
   <div class="wrap op">
     <div class="kop"><h2>Parcours en parkeren</h2></div>
     <div class="parcours">
-      <div class="kaart">Hier komt de kaart van het parcours<br>(plattegrond of ingesloten Google&nbsp;Maps)</div>
+      <div>
+        <div class="kaart" id="kaart">De kaart verschijnt zodra de locatie in het CMS is ingevuld</div>
+        <p id="kaartLinkWrap" hidden><a id="kaartLink" href="#" target="_blank" rel="noopener">Routebeschrijving in Google Maps</a></p>
+      </div>
       <ul>
         <li><b>Start en finish</b> aan de Parallelweg, naast de feesttent.</li>
         <li><b>Rondelengte</b> nog in te vullen, met het aantal ronden per categorie.</li>
@@ -376,6 +383,7 @@ const standaard = {
   site:{
     editie:{ jaar:"2027", datum:"2027-09-09T16:30:00", datumLang:"Donderdag 9 september 2027",
              plaats:"Parallelweg, Giessen", start:"16.30 uur" },
+    heroFoto:"", kaart:{ locatie:"", zoom:"16" },
     balktekst:"Inschrijving geopend",
     links:{ inschrijvenRonde:"#", inschrijvenDbr:"#",
             instagram:"https://www.instagram.com/wielerrondegiessen/",
@@ -423,6 +431,28 @@ async function laad(pad){
 
 function toon(inhoud){
   const e = inhoud.site.editie, l = inhoud.site.links;
+
+  /* Kaart met de pin op start en finish. Werkt zonder API-sleutel.
+     Een adres mag, coördinaten geven een preciezere pin. */
+  const k = inhoud.site.kaart || {};
+  if (k.locatie){
+    const waar = encodeURIComponent(k.locatie);
+    const zoom = encodeURIComponent(k.zoom || "16");
+    $("kaart").classList.add("gevuld");
+    $("kaart").innerHTML = `<iframe title="Kaart met start en finish" loading="lazy"`
+      + ` referrerpolicy="no-referrer-when-downgrade"`
+      + ` src="https://maps.google.com/maps?q=${waar}&hl=nl&z=${zoom}&output=embed"></iframe>`;
+    $("kaartLink").href = "https://www.google.com/maps/search/?api=1&query=" + waar;
+    $("kaartLinkWrap").hidden = false;
+  }
+
+  /* Headerfoto uit het CMS. Zonder foto blijft de getekende achtergrond staan. */
+  const kop = inhoud.site.heroFoto;
+  if (kop){
+    $("heroFoto").style.background = `url("${kop}") center / cover no-repeat`;
+    const noot = document.querySelector(".fotonoot");
+    if (noot) noot.style.display = "none";
+  }
 
   $("wanneer").textContent = `${e.datumLang} · ${e.plaats} · eerste start ${e.start}`;
   $("balkLinks").textContent = inhoud.site.balktekst || "";

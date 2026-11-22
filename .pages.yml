@@ -32,6 +32,22 @@ content:
             label: Eerste start
             type: string
             description: "Bijvoorbeeld: 16.30 uur"
+      - name: heroFoto
+        label: Foto bovenaan de pagina
+        type: image
+        description: "Liggende foto, minimaal 1600 px breed. Laat leeg voor de getekende achtergrond."
+      - name: kaart
+        label: Kaart start en finish
+        type: object
+        fields:
+          - name: locatie
+            label: Locatie
+            type: string
+            description: "Een adres, of nauwkeuriger: coördinaten zoals 51.77856, 5.02287. Leeg laten verbergt de kaart."
+          - name: zoom
+            label: Zoomniveau
+            type: string
+            description: "15 is het dorp, 17 is de straat. Leeg laten geeft 16."
       - name: balktekst
         label: Tekst in de bovenste balk
         type: string
